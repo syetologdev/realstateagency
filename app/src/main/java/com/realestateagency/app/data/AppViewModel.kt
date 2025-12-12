@@ -60,7 +60,6 @@ class AppViewModel(private val repository: PropertyRepository = PropertyReposito
         return _properties.value.filter { it.price in minPrice..maxPrice }
     }
 
-    // ✅ Очистить ошибку
     fun clearError() {
         _error.value = null
     }
