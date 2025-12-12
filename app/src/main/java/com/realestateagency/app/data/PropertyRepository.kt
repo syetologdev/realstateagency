@@ -22,11 +22,8 @@ class PropertyRepository {
         install(Realtime)
     }
 
-    // ===========================
-    // 🏠 PROPERTIES
-    // ===========================
 
-    // ✅ Получить все объекты недвижимости
+    // Получить все объекты недвижимости
     fun getAllProperties(): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties").select().decodeList<PropertyListing>()
@@ -38,7 +35,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить объект по ID
+    // Получить объект по ID
     fun getPropertyById(id: Int): Flow<PropertyListing?> = flow {
         try {
             val property = supabase.from("properties").select {
@@ -54,7 +51,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить объекты по городу
+    // Получить объекты по городу
     fun getPropertiesByCity(city: String): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties").select {
@@ -70,7 +67,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить объекты по типу
+    // Получить объекты по типу
     fun getPropertiesByType(type: String): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties").select {
@@ -86,7 +83,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить объекты по диапазону цены
+    // Получить объекты по диапазону цены
     fun getPropertiesByPriceRange(minPrice: Double, maxPrice: Double): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties").select {
@@ -103,7 +100,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Поиск объектов по названию/адресу
+    // Поиск объектов по названию/адресу
     fun searchProperties(query: String): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties").select().decodeList<PropertyListing>()
@@ -120,7 +117,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить популярные объекты (по просмотрам)
+    // Получить популярные объекты (по просмотрам)
     fun getPopularProperties(limit: Int = 10): Flow<List<PropertyListing>> = flow {
         try {
             val properties = supabase.from("properties")
@@ -136,11 +133,7 @@ class PropertyRepository {
         }
     }
 
-    // ===========================
-    // 👤 AGENTS
-    // ===========================
-
-    // ✅ Получить агента по ID
+    // Получить агента по ID
     fun getAgentById(id: Int): Flow<Agent?> = flow {
         try {
             val agent = supabase.from("agents").select {
@@ -156,7 +149,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить всех агентов
+    // Получить всех агентов
     fun getAllAgents(): Flow<List<Agent>> = flow {
         try {
             val agents = supabase.from("agents").select().decodeList<Agent>()
@@ -168,11 +161,7 @@ class PropertyRepository {
         }
     }
 
-    // ===========================
-    // 📞 SHOWING REQUESTS
-    // ===========================
-
-    // ✅ Отправить запрос показа
+    // Отправить запрос показа
     fun submitShowingRequest(request: ShowingRequest): Flow<Boolean> = flow {
         try {
             supabase.from("showing_requests").insert(request)
@@ -184,7 +173,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить все запросы показа агента
+    // Получить все запросы показа агента
     fun getShowingRequestsByAgent(agentId: Int): Flow<List<ShowingRequest>> = flow {
         try {
             val requests = supabase.from("showing_requests").select {
@@ -200,7 +189,7 @@ class PropertyRepository {
         }
     }
 
-    // ✅ Получить все запросы показа по свойству
+    // Получить все запросы показа по свойству
     fun getShowingRequestsByProperty(propertyId: Int): Flow<List<ShowingRequest>> = flow {
         try {
             val requests = supabase.from("showing_requests").select {
@@ -216,11 +205,7 @@ class PropertyRepository {
         }
     }
 
-    // ===========================
-    // 👁️ VIEWS TRACKING
-    // ===========================
-
-    // ✅ Увеличить счётчик просмотров
+    // Увеличить счётчик просмотров
     fun incrementViewCount(propertyId: Int): Flow<Boolean> = flow {
         try {
             val property = supabase.from("properties").select {
